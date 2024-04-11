@@ -424,13 +424,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8852267997712846425}
   - component: {fileID: 2280940615414726469}
-  - component: {fileID: 5432636604352923256}
-  - component: {fileID: 3023966255936066408}
-  - component: {fileID: 7127342829561644933}
-  - component: {fileID: 2296178593742710723}
   - component: {fileID: 5001088978426533867}
   - component: {fileID: 2576393501741614713}
-  - component: {fileID: 3317204103821249259}
   m_Layer: 0
   m_Name: Knight D Pelegrini
   m_TagString: Untagged
@@ -478,59 +473,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5432636604352923256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1348581874451817044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9956fa7bd58b7f4f93cce116da97474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3023966255936066408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1348581874451817044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a28125475440884699b63f49051bb12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementInput: {x: 0, y: 0}
-  verticalInput: 0
-  horizontalInput: 0
---- !u!114 &7127342829561644933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1348581874451817044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d450e077563024e92ef376b6671db9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2296178593742710723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1348581874451817044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35d8162006e07614aabaed57a1df8169, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 7
-  rotationSpeed: 15
 --- !u!54 &5001088978426533867
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -581,18 +523,6 @@ CapsuleCollider:
   m_Height: 2.087292
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &3317204103821249259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1348581874451817044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9956fa7bd58b7f4f93cce116da97474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1661747156570180359
 GameObject:
   m_ObjectHideFlags: 0
