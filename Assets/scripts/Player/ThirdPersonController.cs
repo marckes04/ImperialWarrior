@@ -26,10 +26,16 @@ public class ThirdPersonController : MonoBehaviour
     private Camera playerCamera;
     private Animator animator;
 
+    private Vector3 relativeVector;
+    private bool cursorLocked;
+    private float turnDirection;
+
+
+    public GameObject focusPoint;
 
     private void Awake()
     {
-        rb =this.GetComponent<Rigidbody>();
+        rb = this.GetComponent<Rigidbody>();
         playerActionsAsset = new ThirdInputActionAsset();
         animator = this.GetComponent<Animator>();
     }
@@ -42,7 +48,6 @@ public class ThirdPersonController : MonoBehaviour
         playerActionsAsset.Player.Enable();
     }
 
-  
 
     private void OnDisable()
     {
@@ -61,13 +66,13 @@ public class ThirdPersonController : MonoBehaviour
 
         if (rb.velocity.y < 0f)
             rb.velocity += Vector3.down * Physics.gravity.y * Time.fixedDeltaTime;
-    
+
         Vector3 horizontalVelocity = rb.velocity;
         horizontalVelocity.y = 0f;
 
         if (horizontalVelocity.sqrMagnitude > maxSpeed * maxSpeed)
             rb.velocity = horizontalVelocity.normalized * maxSpeed + Vector3.up * rb.velocity.y;
-        
+
         LookAt();
     }
 
@@ -97,7 +102,7 @@ public class ThirdPersonController : MonoBehaviour
 
     private void DoJump(InputAction.CallbackContext context)
     {
-        if(IsGrounded())
+        if (IsGrounded())
         {
             forceDirection += Vector3.up * jumpForce;
         }
@@ -111,9 +116,9 @@ public class ThirdPersonController : MonoBehaviour
     private bool IsGrounded()
     {
         Ray ray = new Ray(this.transform.position + Vector3.up * 0.25f, Vector3.down);
-        if(Physics.Raycast(ray, out  RaycastHit hit, 0.3f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 0.3f))
             return true;
-        else 
+        else
             return false;
     }
 

@@ -62,6 +62,15 @@ public partial class @ThirdInputActionAsset: IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""192fdd96-913a-41dd-aa48-088755b394cf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -196,6 +205,17 @@ public partial class @ThirdInputActionAsset: IInputActionCollection2, IDisposabl
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4e5589a3-694e-4602-b168-d28e46b82121"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -208,6 +228,7 @@ public partial class @ThirdInputActionAsset: IInputActionCollection2, IDisposabl
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_Cursor = m_Player.FindAction("Cursor", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +294,7 @@ public partial class @ThirdInputActionAsset: IInputActionCollection2, IDisposabl
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_Cursor;
     public struct PlayerActions
     {
         private @ThirdInputActionAsset m_Wrapper;
@@ -281,6 +303,7 @@ public partial class @ThirdInputActionAsset: IInputActionCollection2, IDisposabl
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @Cursor => m_Wrapper.m_Player_Cursor;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -302,6 +325,9 @@ public partial class @ThirdInputActionAsset: IInputActionCollection2, IDisposabl
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @Cursor.started += instance.OnCursor;
+            @Cursor.performed += instance.OnCursor;
+            @Cursor.canceled += instance.OnCursor;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -318,6 +344,9 @@ public partial class @ThirdInputActionAsset: IInputActionCollection2, IDisposabl
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @Cursor.started -= instance.OnCursor;
+            @Cursor.performed -= instance.OnCursor;
+            @Cursor.canceled -= instance.OnCursor;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -341,5 +370,6 @@ public partial class @ThirdInputActionAsset: IInputActionCollection2, IDisposabl
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnCursor(InputAction.CallbackContext context);
     }
 }
