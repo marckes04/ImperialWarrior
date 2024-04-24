@@ -13,25 +13,21 @@ public class ThirdPersonController : MonoBehaviour
     //movement fields
     private Rigidbody rb;
     [SerializeField]
-    private float movementForce = 1f;
+    private float walkMovementForce = 0.5f; // Force applied while walking
+    [SerializeField]
+    private float runMovementForce = 5f; // Force applied while running
 
     [SerializeField]
     private float jumpForce = 5f;
-
     [SerializeField]
-    private float maxSpeed = 5f;
+    private float maxSpeed = 1f;
     private Vector3 forceDirection = Vector3.zero;
 
     [SerializeField]
     private Camera playerCamera;
     private Animator animator;
 
-    private Vector3 relativeVector;
-    private bool cursorLocked;
-    private float turnDirection;
-
-
-    public GameObject focusPoint;
+    private bool isRunning = false;
 
     private void Awake()
     {
@@ -44,22 +40,27 @@ public class ThirdPersonController : MonoBehaviour
     {
         playerActionsAsset.Player.Jump.started += DoJump;
         playerActionsAsset.Player.Attack.started += DoAttack;
+        playerActionsAsset.Player.Run.started += StartRunning;
+        playerActionsAsset.Player.Run.canceled += StopRunning;
         move = playerActionsAsset.Player.Move;
         playerActionsAsset.Player.Enable();
     }
-
 
     private void OnDisable()
     {
         playerActionsAsset.Player.Jump.started -= DoJump;
         playerActionsAsset.Player.Attack.started -= DoAttack;
+        playerActionsAsset.Player.Run.started -= StartRunning;
+        playerActionsAsset.Player.Run.canceled -= StopRunning;
         playerActionsAsset.Player.Disable();
     }
 
     private void FixedUpdate()
     {
-        forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * movementForce;
-        forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * movementForce;
+        float currentMovementForce = isRunning ? runMovementForce : walkMovementForce;
+
+        forceDirection += move.ReadValue<Vector2>().x * GetCameraRight(playerCamera) * currentMovementForce;
+        forceDirection += move.ReadValue<Vector2>().y * GetCameraForward(playerCamera) * currentMovementForce;
 
         rb.AddForce(forceDirection, ForceMode.Impulse);
         forceDirection = Vector3.zero;
@@ -86,11 +87,21 @@ public class ThirdPersonController : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
     }
 
+    private void StartRunning(InputAction.CallbackContext context)
+    {
+        isRunning = true;
+    }
+
+    private void StopRunning(InputAction.CallbackContext context)
+    {
+        isRunning = false;
+    }
+
     private Vector3 GetCameraForward(Camera playerCamera)
     {
-        Vector3 foward = playerCamera.transform.forward;
-        foward.y = 0;
-        return foward.normalized;
+        Vector3 forward = playerCamera.transform.forward;
+        forward.y = 0;
+        return forward.normalized;
     }
 
     private Vector3 GetCameraRight(Camera playerCamera)
@@ -121,5 +132,4 @@ public class ThirdPersonController : MonoBehaviour
         else
             return false;
     }
-
 }
